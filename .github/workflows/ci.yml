@@ -16,7 +16,7 @@ jobs:
           node-version: "22"
 
       - name: Install dependecies
-        uses: npm install
+        run: npm install
 
       - name: Build react app
-        uses: npm run build
+        run: npm run build
