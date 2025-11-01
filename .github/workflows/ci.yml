@@ -1,13 +1,17 @@
-name: Practice CI
+name: Practice full stack CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test-ci:
+  build-App:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get code from repo
+      - name: Get Code from Repo
         uses: actions/checkout@v3
 
       - name: Setup Node
@@ -15,8 +19,18 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install dependecies
+      - name: Install Frontend dependencies
+        working-directory: ./app/Frontend
         run: npm install
 
-      - name: Build react app
+      - name: Build Frontend
+        working-directory: ./app/Frontend
+        run: npm run build
+
+      - name: Install Backend dependencies
+        working-directory: ./app/Backend
+        run: rpm install
+
+      - name: Build Backend
+        working-directory: ./app/Backend
         run: npm run build
