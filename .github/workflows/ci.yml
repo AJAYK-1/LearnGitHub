@@ -30,7 +30,3 @@ jobs:
       - name: Install Backend dependencies
         working-directory: ./Backend
         run: npm install
-
-      - name: Build Backend
-        working-directory: ./Backend
-        run: npm run build
