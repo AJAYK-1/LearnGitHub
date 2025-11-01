@@ -20,17 +20,17 @@ jobs:
           node-version: "22"
 
       - name: Install Frontend dependencies
-        working-directory: ./app/Frontend
+        working-directory: ./Frontend
         run: npm install
 
       - name: Build Frontend
-        working-directory: ./app/Frontend
+        working-directory: ./Frontend
         run: npm run build
 
       - name: Install Backend dependencies
-        working-directory: ./app/Backend
-        run: rpm install
+        working-directory: ./Backend
+        run: npm install
 
       - name: Build Backend
-        working-directory: ./app/Backend
+        working-directory: ./Backend
         run: npm run build
