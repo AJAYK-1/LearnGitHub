@@ -17,8 +17,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "25"
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install Frontend dependencies
+        working-directory: ./Frontend
+        run: npm install
 
       - name: Cache Frontend node_modules
         uses: actions/cache@v3
@@ -27,13 +31,13 @@ jobs:
             ./Frontend/node_modules
           key: frontend-${{ hashFiles('Frontend/package-lock.json') }}
 
-      - name: Install Frontend dependencies
-        working-directory: ./Frontend
-        run: npm install
-
       - name: Build Frontend
         working-directory: ./Frontend
         run: npm run build
+
+      - name: Install Backend dependencies
+        working-directory: ./Backend
+        run: npm install
 
       - name: Cache Backend node_modules
         uses: actions/cache@v3
@@ -41,7 +45,3 @@ jobs:
           path: |
             ./Backend/node_modules
           key: backend-${{ hashFiles('Backend/package-lock.json') }}
-
-      - name: Install Backend dependencies
-        working-directory: ./Backend
-        run: npm install
