@@ -6,7 +6,7 @@ function App() {
   const [value, setValue] = useState('')
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_HOST_URL}connect`)
+    fetch(`${import.meta.env.VITE_HOST_URL}/connect`)
       .then(res => {
         if (!res.ok)
           throw new Error("Response failed...")

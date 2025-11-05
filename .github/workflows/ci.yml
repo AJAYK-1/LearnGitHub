@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-App:
+  build-Fullstack-App:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "22"
+          node-version: "25"
+          cache: 'npm'
+
+      - name: Cache Frontend node_modules
+        uses: actions/chache@v3
+        with:
+          path: |
+            ./Frontend/node_modules
+          key: frontend-${{ hashFiles('Frontend/package-lock.json') }}
 
       - name: Install Frontend dependencies
         working-directory: ./Frontend
@@ -26,6 +34,13 @@ jobs:
       - name: Build Frontend
         working-directory: ./Frontend
         run: npm run build
+
+      - name: Cache Backend node_modules
+        uses: actions/chache@v3
+        with:
+          path: |
+            ./Backend/node_modules
+          key: backend-${{ hashFiles('Backend/package-lock.json') }}
 
       - name: Install Backend dependencies
         working-directory: ./Backend
